@@ -3,7 +3,7 @@ WORKDIR /app
 
 COPY . ./
 RUN dotnet restore
-RUN dotnet publish -c Release -o out
+RUN dotnet publish "product management system.csproj" -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
@@ -12,4 +12,4 @@ COPY --from=build /app/out .
 EXPOSE 10000
 ENV ASPNETCORE_URLS=http://0.0.0.0:10000
 
-ENTRYPOINT ["dotnet", "product management system.dll"]
+ENTRYPOINT ["dotnet", "product_management_system.dll"]
