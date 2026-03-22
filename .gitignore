@@ -1,15 +1,23 @@
-# Node
-node_modules
-dist
-.env
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.cache
+*.db
 
-# .NET
+# Build folders
 bin/
 obj/
 
-# VS Code
-.vscode/
+# Node modules (React)
+node_modules/
 
-# OS
+# Logs
+*.log
+
+# OS files
 .DS_Store
 Thumbs.db
+
+# Environment files
+.env
