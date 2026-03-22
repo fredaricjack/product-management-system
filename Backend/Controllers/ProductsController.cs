@@ -18,10 +18,13 @@ namespace product_management_system.Controllers
 
         // GET
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        {
-            return await _context.Products.ToListAsync();
-        }
+public IActionResult Get()
+{
+    return Ok(new List<object>
+    {
+        new { Id = 1, Name = "Test Product", Price = 100 }
+    });
+}
 
         // POST
         [HttpPost]
