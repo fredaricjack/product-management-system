@@ -33,7 +33,7 @@ public IActionResult Get()
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+            return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
         }
 
         // PUT
