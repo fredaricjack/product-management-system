@@ -1,12 +1,15 @@
-# .NET
-Backend/bin/
-Backend/obj/
-Backend/.vs/
-
-# React
-Frontend/**/node_modules/
-Frontend/**/dist/
-
-# General
+# Node
+node_modules
+dist
 .env
-*.log
+
+# .NET
+bin/
+obj/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
