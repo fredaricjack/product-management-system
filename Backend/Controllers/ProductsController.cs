@@ -17,6 +17,7 @@ namespace product_management_system.Controllers
         [HttpPost]
         public IActionResult AddProduct(object product)
         {
+            products.Add(product);
             return Ok(product);
         }
 
