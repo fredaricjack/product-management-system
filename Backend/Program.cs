@@ -10,11 +10,13 @@ builder.Services.AddSwaggerGen();
 //Add CORS SERVICE
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReact",
-        policy => policy
-            .WithOrigins("http://localhost:5173")
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
 
 // builder.Services.AddDbContext<AppDbContext>(options =>
@@ -29,7 +31,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 // ✅ ADD THIS
-app.UseCors("AllowReact");
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
