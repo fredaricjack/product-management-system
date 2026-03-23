@@ -11,11 +11,14 @@ function ProductCrud() {
 
   // GET PRODUCTS
   const fetchProducts = () => {
-    fetch(API)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error(err));
-  };
+  fetch(API)
+    .then(res => res.json())
+    .then(data => {
+      console.log("API DATA:", data); // ✅ ADD HERE
+      setProducts(data);
+    })
+    .catch(err => console.error(err));
+};
 
   useEffect(() => {
     fetchProducts();
@@ -78,11 +81,11 @@ function ProductCrud() {
         <p>No products</p>
       ) : (
         products.map((p) => (
-          <div key={Math.random()} style={{ marginBottom: "10px" }}>
-            {p.name ?? "No Name"} - ₹{p.price ?? 0}
+          <div key={p.id} style={{ marginBottom: "10px" }}>
+            {p.name} - ₹{p.price}
 
             <button onClick={() => setEditProduct(p)}>Edit</button>
-            <button onClick={() => deleteProduct(p.name)}>Delete</button>
+            <button onClick={() => deleteProduct(p.id)}>Delete</button>
           </div>
         ))
       )}
