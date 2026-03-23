@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API = "http://localhost:5000/api/Products";
+const API = "https://product-api-pdju.onrender.com/api/products";
 
 function EditProduct({ product, refresh, close }) {
   const [name, setName] = useState(product.name);
