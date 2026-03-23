@@ -17,17 +17,15 @@ namespace product_management_system.Controllers
         private static int currentId = 1;
 
         [HttpPost]
-        public IActionResult AddProduct(object product)
+        public async Task<IActionResult> PostProduct([FromBody] Product product)
         {
-            var newProduct = new
-            {
-                Id = currentId++,
-                Name = product.GetType().GetProperty("name")?.GetValue(product),
-                Price = product.GetType().GetProperty("price")?.GetValue(product)
-            };
+            if (product == null)
+                return BadRequest();
 
-            products.Add(newProduct);
-            return Ok(newProduct);
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return Ok(product);
         }
 
         [HttpPut("{id}")]
