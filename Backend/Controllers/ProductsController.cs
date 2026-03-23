@@ -1,42 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using product_management_system.Data;
+using product_management_system.Models;
 
 namespace product_management_system.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ProductsController : ControllerBase
     {
-        private static List<object> products = new List<object>();
+        private readonly AppDbContext _context;
 
-        [HttpGet]
-        public IActionResult Get()
+        // ✅ CONSTRUCTOR (IMPORTANT)
+        public ProductsController(AppDbContext context)
         {
-            return Ok(products);
+            _context = context;
         }
 
-        private static int currentId = 1;
-
-        [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        // GET
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            if (product == null)
-                return BadRequest();
+            return await _context.Products.ToListAsync();
+        }
 
+        // POST
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(Product product)
+        {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return Ok(product);
+            return product;
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id, object product)
-        {
-            return NoContent();
-        }
-
+        // DELETE
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }

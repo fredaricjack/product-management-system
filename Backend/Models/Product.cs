@@ -1,10 +1,11 @@
 ﻿namespace product_management_system.Models
 {
     public class Product
-{
-    public int Id { get; set; }
+    {
+        public int Id { get; set; }
 
-    public string Name { get; set; }   // ✅ NOT NULL
-    public decimal Price { get; set; } // ✅ NOT NULL
-}
+        public string Name { get; set; } = string.Empty;
+
+        public decimal Price { get; set; }
+    }
 }
