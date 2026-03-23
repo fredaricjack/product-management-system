@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EditProduct from "./EditProduct";
 
-const API = "https://product-api-pdju.onrender.com/api/products";
+const API = "https://product-api-541d.onrender.com/api/products";
 
 function ProductCrud() {
   const [products, setProducts] = useState([]);
