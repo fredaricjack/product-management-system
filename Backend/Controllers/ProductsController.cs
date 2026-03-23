@@ -6,10 +6,7 @@ namespace product_management_system.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private static List<object> products = new List<object>
-        {
-            new { Id = 1, Name = "Test Product", Price = 100 }
-        };
+        private static List<object> products = new List<object>();
 
         [HttpGet]
         public IActionResult Get()
