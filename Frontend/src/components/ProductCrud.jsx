@@ -75,18 +75,18 @@ function ProductCrud() {
 
       <hr />
 
-      <h2>Product List</h2>
+      <h3>Product List</h3>
 
       {products.length === 0 ? (
         <p>No products</p>
       ) : (
-        products.map((p) => (
-        <div key={p.id} style={{ marginBottom: "10px" }}>
-          {p.Name} - ₹{p.Price}
+        products.map((product) => (
+          <div key={product.id}>
+            <span>{product.name} - ₹{product.price}</span>
 
-          <button onClick={() => setEditProduct(p)}>Edit</button>
-          <button onClick={() => deleteProduct(p.id)}>Delete</button>
-        </div>
+            <button onClick={() => setEditProduct(product)}>Edit</button>
+            <button onClick={() => deleteProduct(product.id)}>Delete</button>
+          </div>
         ))
       )}
 
