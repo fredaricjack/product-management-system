@@ -79,7 +79,7 @@ function ProductCrud() {
       ) : (
         products.map((p) => (
           <div key={Math.random()} style={{ marginBottom: "10px" }}>
-            {p.name} - ₹{p.price}
+            {p.name ?? "No Name"} - ₹{p.price ?? 0}
 
             <button onClick={() => setEditProduct(p)}>Edit</button>
             <button onClick={() => deleteProduct(p.name)}>Delete</button>
