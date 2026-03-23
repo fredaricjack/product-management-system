@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
 
 // ✅ DB
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=products.db"));
+    options.UseSqlite("Data Source=/tmp/products.db"));
 
 var app = builder.Build();
 
