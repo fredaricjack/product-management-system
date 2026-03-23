@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Add CORS SERVICE
+// ✅ CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -20,6 +20,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+// ✅ DB
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=products.db"));
 
@@ -30,7 +31,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-// ✅ ADD THIS
+// 🔥 IMPORTANT: CORS MUST BE HERE
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
