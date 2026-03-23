@@ -81,12 +81,12 @@ function ProductCrud() {
         <p>No products</p>
       ) : (
         products.map((p) => (
-          <div key={p.id} style={{ marginBottom: "10px" }}>
-            {p.name} - ₹{p.price}
+        <div key={p.id} style={{ marginBottom: "10px" }}>
+          {p.Name} - ₹{p.Price}
 
-            <button onClick={() => setEditProduct(p)}>Edit</button>
-            <button onClick={() => deleteProduct(p.id)}>Delete</button>
-          </div>
+          <button onClick={() => setEditProduct(p)}>Edit</button>
+          <button onClick={() => deleteProduct(p.id)}>Delete</button>
+        </div>
         ))
       )}
 
