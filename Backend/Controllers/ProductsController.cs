@@ -11,35 +11,55 @@ namespace product_management_system.Controllers
     {
         private readonly AppDbContext _context;
 
-        // ✅ CONSTRUCTOR (IMPORTANT)
+        // CONSTRUCTOR
         public ProductsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET
+        // ✅ GET ALL PRODUCTS
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             return await _context.Products.ToListAsync();
         }
 
-        // POST
+        // ✅ POST (ADD PRODUCT)
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return product;
+            return Ok(product);
         }
 
-        // DELETE
+        // ✅ PUT (UPDATE PRODUCT)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, Product updatedProduct)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            // Update fields
+            product.Name = updatedProduct.Name;
+            product.Price = updatedProduct.Price;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(product);
+        }
+
+        // ✅ DELETE PRODUCT
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            if (product == null) return NotFound();
+
+            if (product == null)
+                return NotFound();
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
