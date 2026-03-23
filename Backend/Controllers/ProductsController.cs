@@ -14,11 +14,20 @@ namespace product_management_system.Controllers
             return Ok(products);
         }
 
+        private static int currentId = 1;
+
         [HttpPost]
         public IActionResult AddProduct(object product)
         {
-            products.Add(product);
-            return Ok(product);
+            var newProduct = new
+            {
+                Id = currentId++,
+                Name = product.GetType().GetProperty("name")?.GetValue(product),
+                Price = product.GetType().GetProperty("price")?.GetValue(product)
+            };
+
+            products.Add(newProduct);
+            return Ok(newProduct);
         }
 
         [HttpPut("{id}")]

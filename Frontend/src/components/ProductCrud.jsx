@@ -22,25 +22,29 @@ function ProductCrud() {
   }, []);
 
   // ADD PRODUCT
-  const addProduct = () => {
-   console.log("clicked", name, price); 
-    if (!name || !price) return alert("Enter all fields");
+  const addProduct = async () => {
+  console.log("clicked", name, price);
 
-    fetch(API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        price: parseFloat(price)
-      })
-    }).then(() => {
-      setName("");
-      setPrice("");
-      fetchProducts();
-    });
-  };
+  if (!name || !price) return alert("Enter all fields");
+
+  await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name,
+      price: parseFloat(price)
+    })
+  });
+
+  setName("");
+  setPrice("");
+
+  setTimeout(() => {
+    fetchProducts(); // 🔥 delay fix (Render sleep issue)
+  }, 500);
+};
 
   // DELETE
   const deleteProduct = (id) => {
@@ -74,11 +78,11 @@ function ProductCrud() {
         <p>No products</p>
       ) : (
         products.map((p) => (
-          <div key={p.id} style={{ marginBottom: "10px" }}>
+          <div key={Math.random()} style={{ marginBottom: "10px" }}>
             {p.name} - ₹{p.price}
 
             <button onClick={() => setEditProduct(p)}>Edit</button>
-            <button onClick={() => deleteProduct(p.id)}>Delete</button>
+            <button onClick={() => deleteProduct(p.name)}>Delete</button>
           </div>
         ))
       )}
